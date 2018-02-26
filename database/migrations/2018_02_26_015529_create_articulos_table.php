@@ -17,7 +17,7 @@ class CreateArticulosTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('descripcion');
-            $table->string('imagen')->nullable();
+            $table->text('imagen')->nullable();
             $table->string('codigo');
             $table->integer('aula_id')->unsigned();
             $table->foreign('aula_id')->references('id')->on('aulas')->onDelete('cascade');
