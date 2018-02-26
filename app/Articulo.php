@@ -21,6 +21,6 @@ class Articulo extends Model
 
     public function getImagenAttribute($value)
     {
-        return asset('storage/'.$value);
+        return "https://images.mascotasos.org/".$value;
     }
 }
