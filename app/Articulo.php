@@ -19,8 +19,8 @@ class Articulo extends Model
 		return $this->belongsTo('App\Aula');
 	}
 
-    /*public function getImagenAttribute($value)
+    public function getImagenAttribute($value)
     {
         return "https://images.mascotasos.org/".$value;
-    }*/
+    }
 }

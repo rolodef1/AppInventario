@@ -33,7 +33,7 @@ class ArticulosController extends Controller
     {
         $articulo = new Articulo($request->all());
         $articulo->aula_id = $request->aula_id;
-        /*$s3 = Storage::disk('s3Images');
+        $s3 = Storage::disk('s3Images');
         if (isset($request->imagen) && preg_match('/data:image\/(gif|jpeg|png);base64,(.*)/i', $request->imagen, $matches)) {
             $imageType = $matches[1];
             $imageData = base64_decode($matches[2]);
@@ -43,8 +43,15 @@ class ArticulosController extends Controller
             if($s3->put("$path/$filename",$imageData,'public')){
                 $articulo->imagen = $path_imagen;
             }        
-        }    */  
-        $articulo->imagen = $request->imagen;
+        }else{
+            $imageData = base64_decode($request->imagen);
+            $filename = md5($imageData.time()) . '.jpeg';        
+            $path = "articulos";  
+            $path_imagen = "$path/$filename";                    
+            if($s3->put("$path/$filename",$imageData,'public')){
+                $articulo->imagen = $path_imagen;
+            }        
+        }      
         if($articulo->save()){
             return response()->json([
                 'status' => true,
