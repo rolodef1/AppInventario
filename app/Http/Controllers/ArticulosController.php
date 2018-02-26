@@ -33,14 +33,14 @@ class ArticulosController extends Controller
     {
         $articulo = new Articulo($request->all());
         $articulo->aula_id = $request->aula_id;
-        $publicDisk = Storage::disk('public');
+        $s3 = Storage::disk('s3Images');
         if (isset($request->imagen) && preg_match('/data:image\/(gif|jpeg|png);base64,(.*)/i', $request->imagen, $matches)) {
             $imageType = $matches[1];
             $imageData = base64_decode($matches[2]);
             $filename = md5($imageData.time()) . '.'.$imageType;        
             $path = "articulos";  
             $path_imagen = "$path/$filename";                    
-            if($publicDisk->put("$path/$filename",$imageData,'public')){
+            if($s3->put("$path/$filename",$imageData,'public')){
                 $articulo->imagen = $path_imagen;
             }        
         }        

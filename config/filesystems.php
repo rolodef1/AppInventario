@@ -63,6 +63,14 @@ return [
             'bucket' => env('AWS_BUCKET'),
         ],
 
+        's3Images' => [
+            'driver' => 's3',
+            'key' => env('AWS_KEY'),
+            'secret' => env('AWS_SECRET'),
+            'region' => env('AWS_S3_IMAGES_REGION'),
+            'bucket' => env('AWS_S3_IMAGES_BUCKET'),
+        ],
+
     ],
 
 ];
